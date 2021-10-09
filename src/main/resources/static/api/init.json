@@ -1,11 +1,11 @@
 {
   "homeInfo": {
     "title": "首页",
-    "href": "page/welcome-1.html?t=1"
+    "href": "/welcome"
   },
   "logoInfo": {
-    "title": "LAYUI MINI",
-    "image": "images/logo.png",
+    "title": "管理系统",
+    "image": "images/fire.png",
     "href": ""
   },
   "menuInfo": [
@@ -16,15 +16,15 @@
       "target": "_self",
       "child": [
         {
-          "title": "主页模板",
+          "title": "员工管理",
           "href": "",
           "icon": "fa fa-home",
           "target": "_self",
           "child": [
             {
-              "title": "主页一",
+              "title": "员工列表",
               "href": "page/welcome-1.html",
-              "icon": "fa fa-tachometer",
+              "icon": "layui-icon layui-icon-user",
               "target": "_self"
             },
             {

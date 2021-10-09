@@ -29,6 +29,11 @@ public class CommonController {
         return "index";
     }
 
+    @GetMapping("/welcome")
+    public String welcome() {
+        return "welcome";
+    }
+
     @GetMapping("/captcha")
     public void happyCaptcha(HttpServletRequest request, HttpServletResponse response){
         HappyCaptcha.require(request,response).build().finish();
