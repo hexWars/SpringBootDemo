@@ -25,22 +25,26 @@ public class WebConfig implements WebMvcConfigurer {
      * 注册拦截器
      * @param registry
      */
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        InterceptorRegistration registration = registry.addInterceptor(handlerInterceptor);
-//        //拦截路径
-//        registration.addPathPatterns("/**");
-//        //放行路径
-//        registration.excludePathPatterns(
-//                "/login",
-//                "/captcha",
-//                "/user/login",
-//                "/user/logout",
-//                "/layui/**",
-//                "/lib/**",
-//                "/webjars/**"
-//        );
-//
-//        WebMvcConfigurer.super.addInterceptors(registry);
-//    }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        InterceptorRegistration registration = registry.addInterceptor(handlerInterceptor);
+        //拦截路径
+        registration.addPathPatterns("/**");
+        //放行路径
+        registration.excludePathPatterns(
+                "/login",
+                "/captcha",
+                "/user/login",
+                "/user/logout",
+                "/layui/**",
+                "/lib/**",
+                "/webjars/**",
+                "/spi/**",
+                "/css/**",
+                "/images/**",
+                "/js/**"
+        );
+
+        WebMvcConfigurer.super.addInterceptors(registry);
+    }
 }
