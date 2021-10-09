@@ -26,7 +26,7 @@ public class Result<T> {
     private Long count;
 
     public static Result<Object> success() {
-        return new Result(0, "success", null, null);
+        return new Result(1, "success", null, null);
     }
 
     public static Result<Object> fail() {
