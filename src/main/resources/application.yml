@@ -18,9 +18,21 @@ spring:
     url: jdbc:mysql://localhost:3306/shendun?serverTimezone=GMT%2B8
     username: root
     password: 818181
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: GMT+8
+
 
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
   type-aliases-package: top.sehnsucht.*.entity
   configuration:
     map-underscore-to-camel-case: true # 驼峰
+
+
+#logging:
+#  level: debug
+
+logging:
+  level:
+    top.sehnsucht: debug

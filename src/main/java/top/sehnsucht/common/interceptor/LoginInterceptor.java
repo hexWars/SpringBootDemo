@@ -25,7 +25,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         Object info = request.getSession().getAttribute("userInfo");
         if (info == null) {
             log.debug("无登录请求 " + request.getRequestURI());
-            response.sendRedirect(request.getContextPath() + "login");
+            response.sendRedirect(request.getContextPath() + "/login");
             return false;
         }
         log.debug("放行请求 " + request.getRequestURI());
