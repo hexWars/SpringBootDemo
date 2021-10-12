@@ -22,6 +22,7 @@ public class EmpServiceImpl implements EmpService {
 
     @Override
     public List<Emp> getEmplist(EmpQuery param) {
+        System.out.println(param.getName() + ' ' + param.getStartDate() + ' ' + param.getEndDate());
         return empMapper.getEmpList(param);
     }
 

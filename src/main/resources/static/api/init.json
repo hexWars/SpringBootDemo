@@ -23,7 +23,7 @@
           "child": [
             {
               "title": "员工列表",
-              "href": "/emp",
+              "href": "emp",
               "icon": "layui-icon layui-icon-user",
               "target": "_self"
             },
