@@ -206,7 +206,7 @@
             let url = "user/login";
             $.post(url, data, function (response) {
                 console.log(response);
-                if (response.code === 1) {
+                if (response.code === 0) {
                     layer.msg('登录成功', {icon: 6,time:1500}, function () {
                         window.location = 'index';
                     });

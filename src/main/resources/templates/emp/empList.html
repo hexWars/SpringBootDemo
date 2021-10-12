@@ -1,10 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="icon" th:href="@{/images/favicon.ico}">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/layuimini.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/themes/default.css}" media="all">
+    <link rel="stylesheet" th:href="@{/lib/font-awesome-4.7.0/css/font-awesome.min.css}" media="all">
+    <style>
+        .div-content {
+            background-color: white;
+            border-radius: 15px;
+            padding: 15px;
+        }
+
+        .table-search-fieldset {
+            margin: 0;
+            border: 1px solid #e6e6e6;
+            padding: 10px 20px 5px 20px;
+            color: #6b6b6b;
+        }
+    </style>
 </head>
 <body>
-XXX
+<div class="div-content">
+    <form class="layui-form layui-form-pane" action="">
+        <fieldset class="table-search-fieldset">
+            <legend>搜索条件</legend>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">员工姓名:</label>
+                    <div class="layui-input-inline" style="width: 150px;">
+                        <input type="text" name="name" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                    </div>
+
+                    <label class="layui-form-label">日期:</label>
+                    <div class="layui-input-inline" style="width: 200px;">
+                        <input type="text" name="name" placeholder="起始日期" autocomplete="off" class="layui-input date">
+                    </div>
+                    <div class="layui-form-mid">-</div>
+                    <div class="layui-input-inline" style="width: 200px;">
+                        <input type="text" name="price_max" placeholder="终止日期" autocomplete="off"
+                               class="layui-input date">
+                    </div>
+                    <button type="button" class="layui-btn layui-btn-radius layui-btn-normal">
+                        <i class="layui-icon layui-icon-search"></i>
+                        查询
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <table id="table-emp" lay-filter="table-emp-filter"></table>
+</div>
+
+
+<script th:src="@{layui/layui.js}" charset="utf-8"></script>
+<script th:inline="javascript">
+    // var ctxPath = [@[/]];
+    layui.use(['laydate', 'table'], function () {
+        var laydate = layui.laydate;
+        var table = layui.table;
+        //执行一个laydate实例
+        laydate.render({
+            elem: '.date' //指定元素
+        });
+
+        table.render({
+            elem: '#table-emp'
+            // ,height: 312
+            , url: 'emp/list' //数据接口
+            , page: true //开启分页
+            , limits:[3,5,10,20,50,100,200,500]
+            , cols: [[ //表头
+                {field: 'empId', title: '员工编号', width: 100, sort: true, align: 'center'}
+                , {field: 'name', title: '姓名', width: 80, align: 'center'}
+                , {field: 'sex', title: '性别', width: 80, sort: true, align: 'center'}
+                , {field: 'age', title: '年龄', width: 80, align: 'center'}
+                , {field: 'sal', title: '工资', width: 177}
+                , {field: 'birthday', title: '生日', width: 140, sort: true, align: 'center'}
+                , {field: 'address', title: '家庭住址'}
+                , {field: 'deptId', title: '部门', width: 130, sort: true, align: 'center'}
+                , {title: '操作', width: 135, align: 'center'}
+            ]]
+        });
+    });
+</script>
 </body>
 </html>

@@ -26,19 +26,19 @@ public class Result<T> {
     private Long count;
 
     public static Result<Object> success() {
-        return new Result(1, "success", null, null);
+        return new Result(0, "success", null, null);
     }
 
     public static Result<Object> success(Object data, Long count) {
-        return new Result(1, "success", data, count);
+        return new Result(0, "success", data, count);
     }
 
     public static Result<Object> fail() {
-        return new Result(0, "fail", null, null);
+        return new Result(1, "fail", null, null);
     }
 
     public static Result<Object> fail(String message) {
-        return new Result(0, message, null, null);
+        return new Result(1, message, null, null);
     }
 
 
