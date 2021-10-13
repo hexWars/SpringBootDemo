@@ -1,5 +1,6 @@
 package top.sehnsucht.emp.service;
 
+import top.sehnsucht.emp.entity.Dept;
 import top.sehnsucht.emp.entity.Emp;
 import top.sehnsucht.emp.vo.EmpQuery;
 
@@ -13,7 +14,11 @@ import java.util.List;
  */
 
 public interface EmpService {
-    public List<Emp> getEmplist(EmpQuery param);
+    List<Emp> getEmplist(EmpQuery param);
 
-    public Long countEmpList(EmpQuery param);
+    Long countEmpList(EmpQuery param);
+
+    void addEmp(Emp emp);
+
+    List<Dept> getAllDept();
 }

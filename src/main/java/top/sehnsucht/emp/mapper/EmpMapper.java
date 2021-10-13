@@ -9,4 +9,6 @@ public interface EmpMapper {
     List<Emp> getEmpList(EmpQuery param);
 
     Long countEmpList(EmpQuery param);
+
+    void addEmp(Emp emp);
 }

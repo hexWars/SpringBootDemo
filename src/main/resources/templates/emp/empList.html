@@ -58,16 +58,27 @@
 
 
 <script th:src="@{layui/layui.js}" charset="utf-8"></script>
-<script type="text/html" id="converSex">
+<script type="text/html" id="convertSex">
     {{#
-        if (d.sex == 'M') {
-            return '男';
-        } else if (d.sex == 'F') {
-            return '女';
-        } else {
-            return '无';
-        }
+    if (d.sex == 'M') {
+    return '男';
+    } else if (d.sex == 'F') {
+    return '女';
+    } else {
+    return '无';
+    }
     }}
+</script>
+<script type="text/html" id="convertDept">
+    {{#
+    return d.dept.deptName;
+    }}
+</script>
+<script type="text/html" id="table-emp-toolbar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete">删除</button>
+    </div>
 </script>
 <script th:inline="javascript">
     // var ctxPath = [@[/]];
@@ -75,6 +86,35 @@
         var laydate = layui.laydate;
         var table = layui.table;
         var form = layui.form;
+
+        //表格头部工具栏事件监听
+        table.on('toolbar(table-emp-filter)', function(obj){
+            if (obj.event === "add") {
+                layer.open({
+                    type: 2,
+                    title: "新增员工",
+                    area: ['80%', '80%'],
+                    shadeClose: true,
+                    content: 'emp/add/ui'
+                });
+            } else if (obj.event === "delete") {
+                alert("delete");
+            }
+
+            // var checkStatus = table.checkStatus(obj.config.id);
+            // switch(obj.event){
+            //     case 'add':
+            //         layer.msg('添加');
+            //         break;
+            //     case 'delete':
+            //         layer.msg('删除');
+            //         break;
+            //     case 'update':
+            //         layer.msg('编辑');
+            //         break;
+            // };
+        });
+
         //执行一个laydate实例
         laydate.render({
             elem: '.date' //指定元素
@@ -85,16 +125,17 @@
             // ,height: 312
             , url: 'emp/list' //数据接口
             , page: true //开启分页
+            , toolbar: "#table-emp-toolbar"
             , limits:[3,5,10,20,50,100,200,500]
             , cols: [[ //表头
                 {field: 'empId', title: '员工编号', width: 100, sort: true, align: 'center'}
                 , {field: 'name', title: '姓名', width: 80, align: 'center'}
-                , {field: 'sex', title: '性别', width: 80, sort: true, align: 'center', templet: '#converSex'}
+                , {field: 'sex', title: '性别', width: 80, sort: true, align: 'center', templet: '#convertSex'}
                 , {field: 'age', title: '年龄', width: 80, align: 'center'}
                 , {field: 'sal', title: '工资', width: 177}
                 , {field: 'birthday', title: '生日', width: 140, sort: true, align: 'center'}
                 , {field: 'address', title: '家庭住址'}
-                , {field: 'deptId', title: '部门', width: 130, sort: true, align: 'center'}
+                , {field: 'dept', title: '部门', width: 130, sort: true, align: 'center', templet: '#convertDept'}
                 , {title: '操作', width: 135, align: 'center'}
             ]]
         });
