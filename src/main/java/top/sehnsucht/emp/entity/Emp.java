@@ -1,5 +1,6 @@
 package top.sehnsucht.emp.entity;
 
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.Date;
  * ~~(^_^)~~
  */
 
+@ApiModel("Emp 员工实体类")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -1,5 +1,6 @@
 package top.sehnsucht.common.vo;
 
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfigurat
  * @CreateTime: 2021/10/9
  * ~~(^_^)~~
  */
-
+@ApiModel("Result 返回结果实体基类")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

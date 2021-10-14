@@ -1,5 +1,6 @@
 package top.sehnsucht.common.vo;
 
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import java.io.Serializable;
  * @CreateTime: 2021/10/12
  * ~~(^_^)~~
  */
-
+@ApiModel("Page 分页实体类")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

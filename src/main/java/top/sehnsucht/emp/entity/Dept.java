@@ -1,5 +1,6 @@
 package top.sehnsucht.emp.entity;
 
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import java.io.Serializable;
  * @CreateTime: 2021/10/12
  * ~~(^_^)~~
  */
+@ApiModel("Dept 公司部门实体类")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

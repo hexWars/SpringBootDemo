@@ -1,5 +1,8 @@
 package top.sehnsucht.emp.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +24,7 @@ import java.util.List;
  * @CreateTime: 2021/10/9
  * ~~(^_^)~~
  */
-
+@Api(tags = "员工控制器")
 @Controller
 @RequestMapping("/emp")
 public class EmpController {
@@ -29,12 +32,14 @@ public class EmpController {
     private EmpService empService;
 
     @GetMapping("")
+    @ApiOperation("列表页面")
     public String toEmpListUI(){
         return "emp/empList";
     }
 
     @GetMapping("/list")
     @ResponseBody
+    @ApiOperation("列表接口")
     public Result<Object> getEmpList(EmpQuery param) {
         List<Emp> list = empService.getEmplist(param);
         Long count = empService.countEmpList(param);
@@ -43,12 +48,14 @@ public class EmpController {
 
     @PostMapping("/add")
     @ResponseBody
+    @ApiOperation("添加接口")
     public Result<Object> addEmp(Emp emp) {
         empService.addEmp(emp);
         return Result.success("新增员工成功");
     }
 
     @GetMapping("/add/ui")
+    @ApiOperation("添加界面")
     public String toAddUI(Model model) {
         List<Dept> deptList = empService.getAllDept();
         model.addAttribute("deptList",deptList);
