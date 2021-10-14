@@ -25,7 +25,7 @@
 </head>
 <body>
 <div class="div-content">
-    <form class="layui-form layui-form-pane" action="">
+    <form class="layui-form layui-form-pane" action="" id="form-search">
         <fieldset class="table-search-fieldset">
             <legend>搜索条件</legend>
             <div class="layui-form-item">
@@ -46,9 +46,13 @@
                     </div>
 
                 </div>
-                <button lay-submit lay-filter="btn-search-filter" type="button" class="layui-btn layui-btn-radius layui-btn-normal">
+                <button  id="btn-search" lay-submit lay-filter="btn-search-filter" type="button" class="layui-btn layui-btn-radius layui-btn-normal">
                     <i class="layui-icon layui-icon-search"></i>
                     查询
+                </button>
+                <button  id="btn-reset" type="reset" class="layui-btn layui-btn-radius layui-btn-primary">
+                    <i class="layui-icon layui-icon-fonts-clear"></i>
+                    清空条件
                 </button>
             </div>
         </fieldset>
@@ -56,7 +60,7 @@
     <table id="table-emp" lay-filter="table-emp-filter"></table>
 </div>
 
-
+<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}" charset="utf-8"></script>
 <script th:src="@{layui/layui.js}" charset="utf-8"></script>
 <script type="text/html" id="convertSex">
     {{#
@@ -81,6 +85,15 @@
     </div>
 </script>
 <script th:inline="javascript">
+    
+    function refreshTable() {
+        $("#form-reset").click();
+        $("#btn-search").click();
+
+    }
+    
+    
+    
     // var ctxPath = [@[/]];
     layui.use(['laydate', 'table', 'form'], function () {
         var laydate = layui.laydate;

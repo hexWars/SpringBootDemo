@@ -30,9 +30,6 @@ mybatis:
     map-underscore-to-camel-case: true # 驼峰
 
 
-#logging:
-#  level: debug
-
 logging:
   level:
     top.sehnsucht: debug

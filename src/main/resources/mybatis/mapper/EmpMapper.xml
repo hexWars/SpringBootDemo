@@ -22,6 +22,7 @@
     <select id="getEmpList" resultMap="empMap" parameterType="top.sehnsucht.emp.vo.EmpQuery">
         select * from emp as a left join dept as b on a.dept_id = b.dept_id
         <include refid="getEmpListWhere"></include>
+        order by emp_id asc
         limit #{start},#{limit}
     </select>
     <select id="countEmpList" resultType="long" parameterType="top.sehnsucht.emp.vo.EmpQuery">

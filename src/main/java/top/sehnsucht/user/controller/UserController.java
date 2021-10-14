@@ -1,7 +1,9 @@
 package top.sehnsucht.user.controller;
 
 import com.ramostear.captcha.HappyCaptcha;
-import lombok.extern.slf4j.Slf4j;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +20,7 @@ import javax.servlet.http.HttpSession;
  * @CreateTime: 2021/10/9
  * ~~(^_^)~~
  */
-
+@Api(tags = "用户控制器")
 @RestController
 @RequestMapping(value = "/user", method = RequestMethod.GET)
 public class UserController {
@@ -26,7 +28,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")
-    public Object login(User param, @RequestParam("captcha") String captcha, HttpSession session, HttpServletRequest request) {
+    @ApiOperation("登录接口")
+    public Object login( User param, @RequestParam("captcha") String captcha, HttpSession session, HttpServletRequest request) {
 
         User user = userService.login(param);
         if ( user != null) {
