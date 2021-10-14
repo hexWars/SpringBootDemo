@@ -21,4 +21,10 @@ public interface EmpService {
     void addEmp(Emp emp);
 
     List<Dept> getAllDept();
+
+    void deleteEmpByIds(String ids);
+
+    Emp getEmpById(Integer id);
+
+    void updateEmp(Emp emp);
 }

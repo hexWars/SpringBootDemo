@@ -31,8 +31,8 @@
     </select>
 
     <insert id="addEmp" parameterType="top.sehnsucht.emp.entity.Emp">
-        insert into emp (name,sex,age,sal,birthday,address,dept_id)
-        value (#{name},#{sex},#{age},#{sal},#{birthday},#{address},#{deptId})
+        insert into emp (name, sex, age, sal, birthday, address, dept_id)
+            value (#{name},#{sex},#{age},#{sal},#{birthday},#{address},#{deptId})
     </insert>
 
     <sql id="getEmpListWhere">
@@ -53,4 +53,26 @@
         </where>
     </sql>
 
+    <delete id="deleteEmpByIds" parameterType="string">
+        delete
+        from emp
+        where emp_id in (${ids});
+    </delete>
+
+    <select id="getEmpById" parameterType="integer" resultType="top.sehnsucht.emp.entity.Emp">
+        select *
+        from emp
+        where emp_id = #{Id};
+    </select>
+
+    <update id="updateEmp" parameterType="top.sehnsucht.emp.entity.Emp">
+        update emp
+        set name     = #{name},
+            sex      = #{sex},
+            sal      = #{sal},
+            age      = #{age},
+            birthday = #{birthday},
+            address  = #{address}
+        where emp_id = #{empId}
+    </update>
 </mapper>

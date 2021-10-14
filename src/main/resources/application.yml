@@ -9,6 +9,7 @@ spring:
   thymeleaf:
     cache: false
 
+  #  deleteMapping
   mvc:
     hiddenmethod:
       filter:

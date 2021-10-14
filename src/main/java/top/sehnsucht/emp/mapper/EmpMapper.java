@@ -11,4 +11,10 @@ public interface EmpMapper {
     Long countEmpList(EmpQuery param);
 
     void addEmp(Emp emp);
+
+    void deleteEmpByIds(String ids);
+
+    Emp getEmpById(Integer id);
+
+    void updateEmp(Emp emp);
 }

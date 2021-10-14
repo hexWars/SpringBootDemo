@@ -84,6 +84,10 @@
         <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete">删除</button>
     </div>
 </script>
+<script type="text/html" id="col-emp-toolbar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
 <script th:inline="javascript">
     
     function refreshTable() {
@@ -91,8 +95,6 @@
         $("#btn-search").click();
 
     }
-    
-    
     
     // var ctxPath = [@[/]];
     layui.use(['laydate', 'table', 'form'], function () {
@@ -111,21 +113,36 @@
                     content: 'emp/add/ui'
                 });
             } else if (obj.event === "delete") {
-                alert("delete");
-            }
+                let checkStatus = table.checkStatus('table-emp');
+                //如果没有选中数据
+                if (checkStatus.data.length === 0) {
+                    layer.alert('未选中任何数据', {icon: 2, anim:6 ,title: "警告"});
+                    return false;
+                }
 
-            // var checkStatus = table.checkStatus(obj.config.id);
-            // switch(obj.event){
-            //     case 'add':
-            //         layer.msg('添加');
-            //         break;
-            //     case 'delete':
-            //         layer.msg('删除');
-            //         break;
-            //     case 'update':
-            //         layer.msg('编辑');
-            //         break;
-            // };
+                //选中的id
+                let idArr = new Array();
+                $(checkStatus.data).each(function () {
+                    idArr.push(this.empId);
+                });
+
+                layer.confirm('请确认删除选中的记录', {icon: 3, title:'确认'}, function (index) {
+                    let url = "emp/" + idArr.join(",");
+                    let params = {
+                        _method: "DELETE"
+                    }
+                    $.post(url, params, function (response) {
+                        if (response.code === 0) {
+                            layer.msg(response.message, {icon: 1});
+                            refreshTable();
+                        } else {
+                            layer.msg(response.message, {icon: 2, anim: 6})
+                            refreshTable();
+                        }
+                    });
+                    layer.close(index);
+                });
+            }
         });
 
         //执行一个laydate实例
@@ -141,7 +158,8 @@
             , toolbar: "#table-emp-toolbar"
             , limits:[3,5,10,20,50,100,200,500]
             , cols: [[ //表头
-                {field: 'empId', title: '员工编号', width: 100, sort: true, align: 'center'}
+                {type: "checkbox", width: 60}
+                , {field: 'empId', title: '员工编号', width: 100, sort: true, align: 'center'}
                 , {field: 'name', title: '姓名', width: 80, align: 'center'}
                 , {field: 'sex', title: '性别', width: 80, sort: true, align: 'center', templet: '#convertSex'}
                 , {field: 'age', title: '年龄', width: 80, align: 'center'}
@@ -149,7 +167,7 @@
                 , {field: 'birthday', title: '生日', width: 140, sort: true, align: 'center'}
                 , {field: 'address', title: '家庭住址'}
                 , {field: 'dept', title: '部门', width: 130, sort: true, align: 'center', templet: '#convertDept'}
-                , {title: '操作', width: 135, align: 'center'}
+                , {title: '操作', width: 135, align: 'center', toolbar: '#col-emp-toolbar'}
             ]]
         });
 
@@ -169,6 +187,37 @@
                 }
             });
             return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+        });
+
+        table.on('tool(table-emp-filter)', function (obj) {
+            let data = obj.data;
+            let layEvent = obj.event;
+            if (layEvent === 'del') {
+                layer.confirm('请确认删除该员工: ' + data.name + ' ?', {icon: 3, title:'确认'}, function (index) {
+                    let url = "emp/" + data.empId;
+                    let params = {
+                        _method: "DELETE"
+                    }
+                    $.post(url, params, function (response) {
+                        if (response.code === 0) {
+                            layer.msg(response.message, {icon: 1});
+                            refreshTable();
+                        } else {
+                            layer.msg(response.message, {icon: 2, anim: 6})
+                            refreshTable();
+                        }
+                    });
+                    layer.close(index);
+                });
+            } else if (layEvent === 'edit') {
+                layer.open({
+                    type: 2,
+                    title: "编辑员工",
+                    area: ['80%', '80%'],
+                    shadeClose: true,
+                    content: 'emp/' + data.empId
+                });
+            }
         });
     });
 </script>
