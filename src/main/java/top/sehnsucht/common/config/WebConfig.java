@@ -46,6 +46,7 @@ public class WebConfig implements WebMvcConfigurer {
                 ,"/error"
                 ,"/lswagger-ui"
                 ,"/lo"
+                ,"/emp**/**"
 
                 ,"/swagger**/**"
                 ,"/webjars/**"
